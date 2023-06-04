@@ -1,0 +1,70 @@
+import { useTodoContext } from '../context/Context';
+import Delete from '../assets/trash-can-outline.svg';
+
+export default function ImportantTodos() {
+  const { todos, editTodo, deleteTodo } = useTodoContext();
+  return (
+    <div>
+      {todos.map((todo) => {
+        if (todo.importance) {
+          return (
+            <div>
+              <h1>{todo.projectName}</h1>
+              <h2>{todo.title}</h2>
+              <p>{todo.description}</p>
+              <p>{todo.date}</p>
+              <div>
+                <label htmlFor="important">Important?</label>
+                <input
+                  type="checkbox"
+                  name="important"
+                  id="important"
+                  defaultChecked={todo.importance}
+                  onChange={() =>
+                    editTodo(
+                      todo.id,
+                      todo.projId,
+                      todo.projectName,
+                      todo.title,
+                      todo.description,
+                      todo.date,
+                      !todo.importance,
+                      todo.completion
+                    )
+                  }
+                />
+              </div>
+              <div>
+                <label htmlFor="complete">Completed?</label>
+                <input
+                  type="checkbox"
+                  name="complete"
+                  id="complete"
+                  defaultChecked={todo.completion}
+                  onChange={() =>
+                    editTodo(
+                      todo.id,
+                      todo.projId,
+                      todo.projectName,
+                      todo.title,
+                      todo.description,
+                      todo.date,
+                      todo.importance,
+                      !todo.completion
+                    )
+                  }
+                />
+              </div>
+              <div className="flex justify-between items-center">
+                <button onClick={() => deleteTodo(todo.id)}>
+                  <img className="h-8" src={Delete} alt="Delete" />
+                </button>
+              </div>
+            </div>
+          );
+        }
+        return;
+      })}
+    </div>
+  );
+}
