@@ -3,7 +3,7 @@ import { format } from 'date-fns';
 import { isSameWeek } from 'date-fns';
 import Delete from '../assets/trash-can-outline.svg';
 
-const today = format(new Date(), 'dd/MM/yyyy');
+const today = format(new Date(), 'MM/dd/yyyy');
 
 export default function Weeklies() {
   const { todos, editTodo, deleteTodo } = useTodoContext();
@@ -12,7 +12,7 @@ export default function Weeklies() {
       {todos.map((todo) => {
         const border = todo.importance ? 'border-red-700' : 'border-gray-500';
         const checkWeek = isSameWeek(new Date(todo.date), new Date(today));
-        if (checkWeek) {
+        if (checkWeek === true) {
           return (
             <div
               key={todo.id}

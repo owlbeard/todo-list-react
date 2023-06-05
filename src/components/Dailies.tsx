@@ -1,8 +1,8 @@
 import { useTodoContext } from '../context/Context';
 import { format } from 'date-fns';
 import Delete from '../assets/trash-can-outline.svg';
-const today = format(new Date(), 'dd/MM/yyyy');
-console.log(today);
+
+const today = format(new Date(), 'MM/dd/yyyy');
 
 export default function Dailies() {
   const { todos, editTodo, deleteTodo } = useTodoContext();

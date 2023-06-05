@@ -12,3 +12,7 @@ input:focus {
   filter: invert(100%) sepia(0%) saturate(2%) hue-rotate(57deg) brightness(109%)
     contrast(101%);
 }
+
+input[type='checkbox'] {
+  transform: scale(150%);
+}

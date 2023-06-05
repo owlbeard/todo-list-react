@@ -44,7 +44,7 @@ type ContextProps = {
   deleteTodo: (id: string) => void;
   addProject: (id: string, name: string) => void;
   editProject: (id: string, name: string) => void;
-  deleteProject: (id: string, name: string) => void;
+  deleteProject: (id: string) => void;
   render: string;
   setRender: React.Dispatch<React.SetStateAction<string>>;
   todos: TodoItem[];
@@ -93,10 +93,22 @@ export function TodoProvider({ children }: TodoProviderProps) {
     importance: boolean,
     completion: boolean
   ) {
-    const newTodos: any = todos.map((todo) => {
+    const item = {
+      id: id,
+      projId: projId,
+      projectName: projectName,
+      title: title,
+      description: description,
+      date: date,
+      importance: importance,
+      completion: completion,
+    };
+    console.log(item);
+    const newTodos = todos.map((todo) => {
       if (todo.id === id) {
         return {
-          ...todo,
+          id: id,
+          projId: projId,
           projectName: projectName,
           title: title,
           description: description,
@@ -107,16 +119,18 @@ export function TodoProvider({ children }: TodoProviderProps) {
       }
       return todo;
     });
-    const newProjects: any = projects.map((project) => {
+    const newProjects = projects.map((project) => {
       if (project.id === projId) {
         return {
-          ...project,
+          id: projId,
           name: projectName,
         };
       }
+      return project;
     });
     setTodos(newTodos);
     setProjects(newProjects);
+    setRender(projectName);
   }
   function deleteTodo(id: string) {
     const newTodos = todos.filter((todo) => todo.id !== id);
@@ -128,11 +142,16 @@ export function TodoProvider({ children }: TodoProviderProps) {
       id: id,
       name: name,
     };
-    setProjects([...projects, newProject]);
+    const checkProj = projects.filter((project) => project.name === name);
+    console.log(checkProj.length);
+    if (checkProj.length === 0) setProjects([...projects, newProject]);
   }
   function editProject(id: string, name: string) {
     const newProjects = projects.map((project) => {
-      if (project.id === id) return { ...project, name: name };
+      if (project.id === id) {
+        setRender(name);
+        return { ...project, name: name };
+      }
       return project;
     });
     const newTodos: any = todos.map((todo) => {
@@ -146,7 +165,6 @@ export function TodoProvider({ children }: TodoProviderProps) {
     });
     setProjects(newProjects);
     setTodos(newTodos);
-    setRender(name);
   }
   function deleteProject(id: string) {
     const newProjects = projects.filter((project) => project.id !== id);
