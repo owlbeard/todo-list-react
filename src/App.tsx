@@ -6,9 +6,11 @@ import { TodoProvider } from './context/Context';
 function App() {
   return (
     <TodoProvider>
-      <Header />
-      <Todos />
-      <Footer />
+      <div className="container flex flex-col h-screen sm:min-w-full">
+        <Header />
+        <Todos />
+        <Footer />
+      </div>
     </TodoProvider>
   );
 }

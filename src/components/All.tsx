@@ -5,7 +5,7 @@ import { format } from 'date-fns';
 export default function All() {
   const { todos, editTodo, deleteTodo } = useTodoContext();
   return (
-    <div className="flex flex-wrap gap-4">
+    <div className="flex flex-wrap justify-center gap-4">
       {todos.map((todo) => {
         const border = todo.importance ? 'border-red-700' : 'border-gray-500';
         return (

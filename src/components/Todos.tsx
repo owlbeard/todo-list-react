@@ -1,30 +1,18 @@
-// @ts-nocheck
 import { useTodoContext } from '../context/Context';
 import uniqid from 'uniqid';
 import { format } from 'date-fns';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import Dailies from './Dailies';
 import Weeklies from './Weeklies';
 import All from './All';
 import ImportantTodos from './ImportantTodos';
 import ProjectTodos from './ProjectTodos';
 import Add from '../assets/plus-circle-outline.svg';
-import Confirm from '../assets/check.svg';
-import Cancel from '../assets/close.svg';
-import Delete from '../assets/trash-can-outline.svg';
-import Edit from '../assets/file-edit-outline.svg';
+import { motion as m } from 'framer-motion';
+import Projects from './Projects';
 
 export default function Todos() {
-  const {
-    addTodo,
-    addProject,
-    todos,
-    projects,
-    render,
-    setRender,
-    editProject,
-    deleteProject,
-  } = useTodoContext();
+  const { addTodo, addProject, render } = useTodoContext();
   const [hidden, setHidden] = useState(true);
   const projRef = useRef<HTMLInputElement>(null);
   const titleRef = useRef<HTMLInputElement>(null);
@@ -32,65 +20,18 @@ export default function Todos() {
   const dateRef = useRef<HTMLInputElement>(null);
   const importRef = useRef<HTMLInputElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
-
-  useEffect(() => {
-    console.log(todos);
-    console.log(projects);
-  }, [todos]);
   return (
-    <div className="flex flex-grow flex-wrap">
-      <div className="flex flex-col bg-slate-700">
-        {projects.length > 0 ? <h2 className="p-4">Projects:</h2> : null}
-        <ul>
-          {projects.map((project) => {
-            return (
-              <div
-                key={uniqid()}
-                onClick={() => setRender(project.name)}
-                className="flex justify-between items-center gap-4 rounded-xl border-2 border-green-600 cursor-pointer m-6 hover:scale-110 transition-transform active:scale-95"
-              >
-                <li key={project.id} className="flex-grow">
-                  <div>
-                    <form
-                      className="flex items-center gap-2 relative"
-                      onSubmit={(e) => {
-                        const value = e.target.firstChild.value;
-                        e.preventDefault();
-                        editProject(project.id, value);
-                      }}
-                    >
-                      <input
-                        className="rounded-xl bg-transparent cursor-pointer p-2 mr-20"
-                        type="text"
-                        defaultValue={project.name}
-                        required
-                      />
-                      <button
-                        type="submit"
-                        className="p2 bg-yellow-500 z-10 absolute right-10 rounded-l-xl"
-                      >
-                        <img className="h-10 white" src={Edit} alt="Edit" />
-                      </button>
-                      <button
-                        onClick={() => deleteProject(project.id)}
-                        className="p2 bg-red-500 z-10 absolute right-0 rounded-r-xl"
-                      >
-                        <img className="h-10 white" src={Delete} alt="Delete" />
-                      </button>
-                    </form>
-                  </div>
-                </li>
-              </div>
-            );
-          })}
-        </ul>
-      </div>
-      <div className="p-2 flex-grow flex flex-col items-center justify-start relative">
+    <div className="flex flex-grow container sm:min-w-full">
+      <Projects />
+      <div className="main bg-slate-400 p-2 flex-grow flex flex-col items-center justify-start relative">
         {!hidden ? (
-          <div className="flex items-center justify-center fixed right-0 left-0 top-0 bottom-0 bg-black bg-opacity-40 z-50">
-            <form
+          <div className="flex items-center justify-center fixed right-0 left-0 top-0 bottom-0 bg-black bg-opacity-40 z-20">
+            <m.form
+              animate={{ scale: '100%' }}
+              initial={{ scale: '0%' }}
+              transition={{ duration: 0.5 }}
               ref={formRef}
-              className="flex flex-col justify-center items-center bg-slate-500 p-4 rounded-xl"
+              className="flex flex-col justify-center items-center bg-slate-500 p-4 rounded-xl gap-4"
               onSubmit={(e) => {
                 e.preventDefault();
                 const id = uniqid();
@@ -155,10 +96,10 @@ export default function Todos() {
                   id="date"
                 />
               </div>
-              <div className="flex gap-2 text-lg">
+              <div className="flex w-full gap-2 justify-start text-lg">
                 <label htmlFor="importance">Important:</label>
                 <input
-                  className="text-black rounded-xl"
+                  className="text-black rounded-xl scale-150"
                   ref={importRef}
                   type="checkbox"
                   name="importance"
@@ -182,7 +123,7 @@ export default function Todos() {
                   Add Todo
                 </button>
               </div>
-            </form>
+            </m.form>
           </div>
         ) : null}
         <button onClick={() => setHidden(!hidden)}>

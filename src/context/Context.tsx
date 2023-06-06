@@ -1,4 +1,13 @@
-import { ReactNode, createContext, useContext, useState } from 'react';
+import {
+  ReactNode,
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
+
+const LOCAL_STORAGE_KEY = 'todos';
+const LOCAL_STORAGE_KEY_TWO = 'projects';
 
 type TodoProviderProps = {
   children: ReactNode;
@@ -59,8 +68,18 @@ export function useTodoContext() {
 
 export function TodoProvider({ children }: TodoProviderProps) {
   const [render, setRender] = useState('all');
-  const [todos, setTodos] = useState<TodoItem[]>([]);
-  const [projects, setProjects] = useState<Projects[]>([]);
+  const [todos, setTodos] = useState<TodoItem[]>(() => {
+    return JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)!) || [];
+  });
+  useEffect(() => {
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(todos));
+  }, [todos]);
+  const [projects, setProjects] = useState<Projects[]>(() => {
+    return JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_TWO)!) || [];
+  });
+  useEffect(() => {
+    localStorage.setItem(LOCAL_STORAGE_KEY_TWO, JSON.stringify(projects));
+  }, [projects]);
   function addTodo(
     id: string,
     projId: string,
@@ -130,7 +149,6 @@ export function TodoProvider({ children }: TodoProviderProps) {
     });
     setTodos(newTodos);
     setProjects(newProjects);
-    setRender(projectName);
   }
   function deleteTodo(id: string) {
     const newTodos = todos.filter((todo) => todo.id !== id);
@@ -149,7 +167,6 @@ export function TodoProvider({ children }: TodoProviderProps) {
   function editProject(id: string, name: string) {
     const newProjects = projects.map((project) => {
       if (project.id === id) {
-        setRender(name);
         return { ...project, name: name };
       }
       return project;
@@ -165,6 +182,7 @@ export function TodoProvider({ children }: TodoProviderProps) {
     });
     setProjects(newProjects);
     setTodos(newTodos);
+    setRender(name);
   }
   function deleteProject(id: string) {
     const newProjects = projects.filter((project) => project.id !== id);

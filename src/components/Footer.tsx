@@ -2,7 +2,7 @@ import GitHub from '../assets/github.svg';
 
 export default function Footer() {
   return (
-    <div className="p-2 flex justify-center items-center gap-2 bg-slate-700">
+    <div className="p-2 flex justify-center items-center gap-2 bg-slate-700 container lg:min-w-full">
       <a href="https://github.com/owlbeard">
         <img
           className="h-12 white hover:scale-110 transition-transform"
