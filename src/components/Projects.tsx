@@ -77,7 +77,7 @@ export default function Projects() {
                       />
                       <button
                         type="submit"
-                        className=" bg-yellow-500 z-10 absolute right-10 rounded-l-xl"
+                        className=" bg-teal-500 z-10 absolute right-10 rounded-l-xl"
                       >
                         <img className="h-10 white" src={Edit} alt="Edit" />
                       </button>
@@ -107,7 +107,7 @@ export default function Projects() {
           animate={{ x: 0 }}
           initial={{ x: '-200%' }}
           transition={{ duration: 0.5 }}
-          className="flex flex-col gap-4 justify-start items-end fixed top-0 left-0 h-screen w-screen bg-grad z-50 pr-8 pt-4 bg-slate-600"
+          className="flex flex-col gap-4 justify-start items-center fixed top-0 left-0 h-screen w-screen bg-grad z-50 pr-8 pt-4 bg-slate-600"
         >
           <m.ul
             className="flex flex-col gap-4"
@@ -136,7 +136,6 @@ export default function Projects() {
                   <li key={project.id} className="flex-grow">
                     <div>
                       <form
-                        className="flex items-center gap-2 relative"
                         onSubmit={(e) => {
                           const target = e.target as HTMLFormElement;
                           const firstChild =
@@ -147,14 +146,14 @@ export default function Projects() {
                         }}
                       >
                         <input
-                          className="rounded-xl bg-transparent cursor-pointer p-2 mr-20"
+                          className="rounded-xl bg-transparent cursor-pointer p-2"
                           type="text"
                           defaultValue={project.name}
                           required
                         />
                         <button
                           type="submit"
-                          className=" bg-yellow-500 z-10 absolute right-10 rounded-l-xl"
+                          className=" bg-teal-500 z-10 absolute right-10 rounded-l-xl"
                         >
                           <img className="h-10 white" src={Edit} alt="Edit" />
                         </button>

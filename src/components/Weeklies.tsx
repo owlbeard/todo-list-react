@@ -22,7 +22,7 @@ export default function Weeklies() {
                 <div className="flex flex-col gap-2">
                   <h1>Project:</h1>
                   <input
-                    className="text-black rounded-xl p-2"
+                    className="focus:bg-slate-700 text-black rounded-xl p-2"
                     type="text"
                     onChange={(e) => {
                       let value = e.target.value;
@@ -43,7 +43,7 @@ export default function Weeklies() {
                 <div className="flex flex-col gap-2">
                   <h2>Task:</h2>
                   <input
-                    className="text-black rounded-xl p-2"
+                    className="focus:bg-slate-700 text-black rounded-xl p-2"
                     type="text"
                     onChange={(e) => {
                       let value = e.target.value;
@@ -64,7 +64,7 @@ export default function Weeklies() {
                 <div className="flex flex-col gap-2">
                   <h2>Description:</h2>
                   <input
-                    className="text-black rounded-xl p-2"
+                    className="focus:bg-slate-700 text-black rounded-xl p-2"
                     type="text"
                     onChange={(e) => {
                       let value = e.target.value;
@@ -101,7 +101,7 @@ export default function Weeklies() {
                         todo.completion
                       );
                     }}
-                    className="text-black rounded-xl p-2"
+                    className="focus:bg-slate-700 text-black rounded-xl p-2"
                     type="date"
                     name="date"
                     id="date"

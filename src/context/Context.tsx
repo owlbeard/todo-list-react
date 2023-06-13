@@ -91,14 +91,14 @@ export function TodoProvider({ children }: TodoProviderProps) {
     completion: boolean
   ) {
     const item = {
-      id: id,
-      projId: projId,
-      projectName: projectName,
-      title: title,
-      description: description,
-      date: date,
-      importance: importance,
-      completion: completion,
+      id,
+      projId,
+      projectName,
+      title,
+      description,
+      date,
+      importance,
+      completion,
     };
     setTodos((prevTodos) => [...prevTodos, item]);
   }
@@ -112,28 +112,17 @@ export function TodoProvider({ children }: TodoProviderProps) {
     importance: boolean,
     completion: boolean
   ) {
-    const item = {
-      id: id,
-      projId: projId,
-      projectName: projectName,
-      title: title,
-      description: description,
-      date: date,
-      importance: importance,
-      completion: completion,
-    };
-    console.log(item);
     const newTodos = todos.map((todo) => {
       if (todo.id === id) {
         return {
-          id: id,
-          projId: projId,
-          projectName: projectName,
-          title: title,
-          description: description,
-          date: date,
-          importance: importance,
-          completion: completion,
+          id,
+          projId,
+          projectName,
+          title,
+          description,
+          date,
+          importance,
+          completion,
         };
       }
       return todo;
@@ -157,11 +146,10 @@ export function TodoProvider({ children }: TodoProviderProps) {
 
   function addProject(id: string, name: string) {
     const newProject = {
-      id: id,
-      name: name,
+      id,
+      name,
     };
     const checkProj = projects.filter((project) => project.name === name);
-    console.log(checkProj.length);
     if (checkProj.length === 0) setProjects([...projects, newProject]);
   }
   function editProject(id: string, name: string) {

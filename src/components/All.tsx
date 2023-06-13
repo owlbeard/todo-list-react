@@ -17,7 +17,7 @@ export default function All() {
               <div className="flex flex-col gap-2">
                 <h1>Project:</h1>
                 <input
-                  className="text-black rounded-xl p-2"
+                  className="text-black rounded-xl p-2 focus:bg-slate-700"
                   type="text"
                   onChange={(e) => {
                     let value = e.target.value;
@@ -38,7 +38,7 @@ export default function All() {
               <div className="flex flex-col gap-2">
                 <h2>Task:</h2>
                 <input
-                  className="text-black rounded-xl p-2"
+                  className="text-black rounded-xl p-2 focus:bg-slate-700"
                   type="text"
                   onChange={(e) => {
                     let value = e.target.value;
@@ -59,7 +59,7 @@ export default function All() {
               <div className="flex flex-col gap-2">
                 <h2>Description:</h2>
                 <input
-                  className="text-black rounded-xl p-2"
+                  className="text-black rounded-xl p-2 focus:bg-slate-700"
                   type="text"
                   onChange={(e) => {
                     let value = e.target.value;
@@ -93,7 +93,7 @@ export default function All() {
                       todo.completion
                     );
                   }}
-                  className="text-black rounded-xl p-2"
+                  className="text-black rounded-xl p-2 focus:bg-slate-700"
                   type="date"
                   name="date"
                   id="date"
