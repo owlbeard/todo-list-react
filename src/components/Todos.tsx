@@ -24,7 +24,7 @@ export default function Todos() {
     <div className="flex flex-grow container sm:min-w-full">
       <Projects />
       <div className="main bg-slate-400 p-2 flex-grow flex flex-col items-center justify-start relative">
-        {!hidden ? (
+        {!hidden && (
           <div className="flex items-center justify-center fixed right-0 left-0 top-0 bottom-0 bg-black bg-opacity-40 z-20">
             <m.form
               animate={{ scale: '100%' }}
@@ -53,19 +53,19 @@ export default function Todos() {
               }}
             >
               {render !== 'today' &&
-              render !== 'week' &&
-              render !== 'important' ? (
-                <div className="flex flex-col text-lg">
-                  <label htmlFor="project">Project Name(optional):</label>
-                  <input
-                    className="text-black p-2 rounded-xl"
-                    ref={projRef}
-                    type="text"
-                    name="project"
-                    id="project"
-                  />
-                </div>
-              ) : null}
+                render !== 'week' &&
+                render !== 'important' && (
+                  <div className="flex flex-col text-lg">
+                    <label htmlFor="project">Project Name(optional):</label>
+                    <input
+                      className="text-black p-2 rounded-xl"
+                      ref={projRef}
+                      type="text"
+                      name="project"
+                      id="project"
+                    />
+                  </div>
+                )}
               <div className="flex flex-col text-lg">
                 <label htmlFor="title">Task Name:</label>
                 <input
@@ -125,7 +125,7 @@ export default function Todos() {
               </div>
             </m.form>
           </div>
-        ) : null}
+        )}
         <button onClick={() => setHidden(!hidden)}>
           <img
             className="h-16 white hover:scale-110 active:scale-90 transition-transform"

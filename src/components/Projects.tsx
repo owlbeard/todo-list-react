@@ -48,7 +48,7 @@ export default function Projects() {
           initial={{ x: '-200%' }}
           transition={{ duration: 0.5 }}
         >
-          {projects.length > 0 ? <h2 className="p-4">Projects:</h2> : null}
+          {projects.length > 0 && <h2 className="p-4">Projects:</h2>}
           {projects.map((project) => {
             return (
               <div
@@ -115,9 +115,7 @@ export default function Projects() {
             initial={{ x: '-200%' }}
             transition={{ duration: 0.5 }}
           >
-            {projects.length > 0 ? (
-              <h2 className="text-xl">Projects:</h2>
-            ) : null}
+            {projects.length > 0 && <h2 className="text-xl">Projects:</h2>}
             {projects.map((project) => {
               return (
                 <div
